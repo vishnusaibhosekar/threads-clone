@@ -1,11 +1,35 @@
 import { React, useState } from "react";
 import { Link } from "react-router-dom";
-import { Avatar, Flex, Box, Text, Image } from "@chakra-ui/react";
+import {
+  Avatar,
+  Flex,
+  Box,
+  Text,
+  Image,
+  Menu,
+  MenuButton,
+  Portal,
+  MenuList,
+  MenuItem,
+  useToast,
+} from "@chakra-ui/react";
 import { BsThreeDots } from "react-icons/bs";
 import Actions from "./Actions";
 
 const userPost = ({ postImg, postTitle, likes, replies }) => {
   const [liked, setLiked] = useState(false);
+  const toast = useToast();
+  const copyURL = () => {
+    const currentURL = window.location.href + "/markzuckerberg/post/1";
+    navigator.clipboard.writeText(currentURL).then(() => {
+      toast({
+        description: "Copied to clipboard",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+      });
+    });
+  };
 
   return (
     <Link to={"/markzuckerberg/post/1"}>
@@ -49,17 +73,31 @@ const userPost = ({ postImg, postTitle, likes, replies }) => {
         <Flex flex={1} flexDirection={"column"} gap={2}>
           <Flex justifyContent={"space-between"} w={"full"}>
             <Flex w={"full"} alignItems={"center"}>
-              <Text fontSize={"sm"} fontWeight={"bold"}>
+              <Text fontSize={{ base: "sm", md: "md" }} fontWeight={"bold"}>
                 markzuckerberg
               </Text>
               <Image src="/verified.png" w={4} h={4} ml={1} />
             </Flex>
             <Flex gap={4} alignItems={"center"}>
-              <Text fontSize={"sm"} color={"gray.light"}>
+              <Text fontSize={{ base: "sm", md: "md" }} color={"gray.light"}>
                 5h
               </Text>
-              <Box className="dot-container">
-                <BsThreeDots />
+              <Box
+                className="dot-container"
+                onClick={(e) => e.preventDefault()}
+              >
+                <Menu>
+                  <MenuButton>
+                    <BsThreeDots />
+                  </MenuButton>
+                  <Portal>
+                    <MenuList bg={"gray.dark"}>
+                      <MenuItem bg={"gray.dark"} onClick={copyURL}>
+                        Copy link to Post
+                      </MenuItem>
+                    </MenuList>
+                  </Portal>
+                </Menu>
               </Box>
             </Flex>
           </Flex>
