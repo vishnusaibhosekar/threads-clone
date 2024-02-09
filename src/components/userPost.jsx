@@ -58,7 +58,9 @@ const userPost = ({ postImg, postTitle, likes, replies }) => {
               <Text fontSize={"sm"} color={"gray.light"}>
                 5h
               </Text>
-              <BsThreeDots />
+              <Box className="dot-container">
+                <BsThreeDots />
+              </Box>
             </Flex>
           </Flex>
           <Text fontSize={"sm"}>{postTitle}</Text>
