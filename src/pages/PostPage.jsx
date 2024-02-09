@@ -11,10 +11,12 @@ import {
   MenuItem,
   useToast,
   Divider,
+  Button,
 } from "@chakra-ui/react";
 import { BsThreeDots } from "react-icons/bs";
 import Actions from "../components/Actions";
 import { React, useState } from "react";
+import Comment from "../components/Comment";
 
 const PostPage = () => {
   const [liked, setLiked] = useState(false);
@@ -90,6 +92,39 @@ const PostPage = () => {
         </Text>
       </Flex>
       <Divider my={4} />
+
+      <Flex justifyContent={"space-between"}>
+        <Flex gap={2} alignItems={"center"}>
+          <Text fontSize={"2xl"}>👋🏻</Text>
+          <Text fontSize={"sm"} color={"gray.light"}>
+            Get the app to like, reply and post
+          </Text>
+          <Button>Get</Button>
+        </Flex>
+      </Flex>
+
+      <Divider my={4} />
+      <Comment
+        comment={"Looks great!"}
+        createdAt={"5h"}
+        likes={500}
+        username={"zorororonoa"}
+        avatar={"https://bit.ly/dan-abramov"}
+      />
+      <Comment
+        comment={"Great work!"}
+        createdAt={"5h"}
+        likes={135}
+        username={"johnsnow"}
+        avatar={"https://bit.ly/kent-c-dodds"}
+      />
+      <Comment
+        comment={"Love it"}
+        createdAt={"5h"}
+        likes={200}
+        username={"satorugojo"}
+        avatar={"https://bit.ly/code-beast"}
+      />
     </>
   );
 };
